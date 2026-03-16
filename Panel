@@ -1,15 +1,23 @@
-Java.perform(function () {
-    var LoginClass = Java.use("com.example.app.LoginActivity");
+<?php
 
-    LoginClass.checkPassword.implementation = function (input) {
-        console.log("Entered Password: " + input);
+// expected apk size (bytes)
+$expected_size = 25400000;  
 
-        // Original method call
-        var result = this.checkPassword(input);
+// client se aya size
+$app_size = $_POST['app_size'];
+$device_id = $_POST['device_id'];
 
-        console.log("Original Result: " + result);
+if ($app_size == $expected_size) {
+    echo json_encode([
+        "status" => "ok",
+        "message" => "Access granted"
+    ]);
+} else {
+    echo json_encode([
+        "status" => "banned",
+        "reason" => "Invalid application size",
+        "device_id" => $device_id
+    ]);
+}
 
-        // Force success
-        return true;
-    };
-});
+?>
