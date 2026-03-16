@@ -1,0 +1,15 @@
+Java.perform(function () {
+    var LoginClass = Java.use("com.example.app.LoginActivity");
+
+    LoginClass.checkPassword.implementation = function (input) {
+        console.log("Entered Password: " + input);
+
+        // Original method call
+        var result = this.checkPassword(input);
+
+        console.log("Original Result: " + result);
+
+        // Force success
+        return true;
+    };
+});
